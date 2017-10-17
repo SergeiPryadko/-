@@ -35,8 +35,4 @@ $(function () {
 
 });
 
-/* $(function(){
-     $('.buttons button').on('click', function(){
-         $(this).prependTo($(this).parent());
-     });
- }); */
+
