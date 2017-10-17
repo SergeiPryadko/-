@@ -1,0 +1,51 @@
+body {
+    background-color: #000639;
+}
+
+#box {
+    width: 290px;
+    margin: 0 auto;
+    display: table;
+}
+
+.squares {
+    width: 40px;
+    height: 40px;
+    float: left;
+    border:solid 1px gray;
+    text-align: center;
+    font-size: 40px;
+    font-family: Times New Roman;
+    color: grey;
+    padding: 10px;
+    margin: 5px;
+}
+
+.squares:hover {
+    color: white;
+    cursor: pointer;
+}
+.squares.hidden {
+    opacity: 0;
+    cursor: default;
+}
+#reset {
+    border: solid 1px gray;
+    background-color: #000639;
+    color: gray;
+    margin-top: 20px;
+    cursor: pointer;
+    margin-left: 46%;
+    padding: 5px 40px;
+}
+
+
+/*.buttons {
+    text-align: center;
+    margin-top: 6%;
+}
+.buttons button {
+    font-size: 2em;
+    margin-right: 10px;
+    padding: 10px;
+}*/
