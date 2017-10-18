@@ -8,6 +8,7 @@ $(function () {
         shuffleArray(num);
         //console.log($box);
         showItems(num);
+        addId();
     });
 
     $('.squares').on('click', function() {                              // движение по горизонтали
@@ -30,6 +31,14 @@ $(function () {
         }
         $box.html(dots); //добавление <div> in html DOM
     }
+    function addId() {                                                  // добавляем id
+        var i = 0;
+        $('.squares').each(function () {
+            i++;
+            $(this).attr("id", "data-item" + i);
+        });
+    };
+
 
     function shuffleArray(array) {                                       // функция перемешивания массив
         for (var i = array.length - 1; i > 0; i--) {
