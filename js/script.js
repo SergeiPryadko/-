@@ -4,43 +4,74 @@ $(function () {
         $box = $('#box');
 
 
-    $('#reset').on('click', function (){                                 // по клику создаем и перемешиваем массив
+
+    $('#reset').on('click', function (){
         shuffleArray(num);
-        //console.log($box);
         showItems(num);
-        addId();
+
+        $('.squares').on('click', function() {
+            var curr_id = $(this).data('id'),
+                zero_index = $('.hidden').index() + 1,
+                curr_index = $(this).index() + 1,
+                move_up = curr_index - 4,
+                move_down = curr_index + 4,
+                move_left = curr_index - 1,
+                move_right = curr_index + 1,
+                forbidden_l = [5, 9, 13],
+                forbidden_r = [4, 8, 12];
+            // console.log(curr_index);
+            // console.log(zero_index);
+            if ((move_left) === zero_index && !(forbidden_l.indexOf(curr_index) > -1) ){
+                swap($(this), $('.hidden'), num);
+            } else if ((move_right) === zero_index && !(forbidden_r.indexOf(curr_index) > -1) ){
+                swap($(this), $('.hidden'), num);
+            } else if ((move_up) === zero_index){
+                swap($(this), $('.hidden'), num);
+            } else if ((move_down) === zero_index){
+                swap($(this), $('.hidden'), num);
+            }
+
+            num = [];
+
+            $('.squares').each(function () {
+                var curr_id = $(this).data('id');
+                num.push(curr_id);
+            });
+
+           //console.log(num);
+
+            for (i = 0; i < num.length; i++) {
+                if ( (num[i+1]-num[i]) === 1 ) {
+                    alert('Victory')
+                }
+            }
+        });
+
     });
 
-    $('.squares').on('click', function() {                              // движение по горизонтали
+    function swap(a, b, arr) {
+        a = $(a); b = $(b);
+        var tmp = $('<div>').hide();
+        a.before(tmp);
+        b.before(a);
+        tmp.replaceWith(b);
+       // console.log(arr);
+    }
 
-        if ($(this).prev().hasClass('hidden')) {
-            $(this).prev().before($(this));
-        } else if ($(this).next().hasClass('hidden')) {
-            $(this).next().after($(this));
-        };
-    });
-
-    function showItems(array){                                            // создаем игровое поле
+    function showItems(array){
         var dots = '';
         for (i = 0; i < array.length; i++) {
             if (array[i] === 0) {
-                dots += '<div class="squares hidden">' + array[i] + '</div>'; //  // устанавливаем div='class' масив
+                dots += '<div class="squares hidden" data-id="' + array[i] + '">' + array[i] + '</div>';
             }else {
-                dots += '<div class="squares">' + array[i] + '</div>';   // устанавливаем div='squares' '0' клетке массив
+                dots +=  '<div class="squares" data-id="' + array[i] + '">' + array[i] + '</div>';
             }
         }
-        $box.html(dots); //добавление <div> in html DOM
+        $box.html(dots);
     }
-    function addId() {                                                  // добавляем id
-        var i = 0;
-        $('.squares').each(function () {
-            i++;
-            $(this).attr("id", "data-item" + i);
-        });
-    };
 
 
-    function shuffleArray(array) {                                       // функция перемешивания массив
+    function shuffleArray(array) {
         for (var i = array.length - 1; i > 0; i--) {
             var j = Math.floor(Math.random() * (i + 1));
             var temp = array[i];
