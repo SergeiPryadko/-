@@ -1,6 +1,7 @@
 $(function () {
 
     var num = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 0],
+        final_num = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 0],
         $box = $('#box');
 
 
@@ -38,13 +39,19 @@ $(function () {
                 num.push(curr_id);
             });
 
-           //console.log(num);
+            // console.log(final_num);
+            // console.log(num);
 
-            for (i = 0; i < num.length; i++) {
-                if ( (num[i+1]-num[i]) === 1 ) {
-                    alert('Victory')
-                }
+            var is_same = num.length == final_num.length && num.every(function(element, index) {
+                return element === final_num[index];
+            });
+
+            if(is_same) {
+                alert('Victory');
+            } else {
+                console.log('Goahead');
             }
+
         });
 
     });
